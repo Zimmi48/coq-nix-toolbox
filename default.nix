@@ -30,7 +30,7 @@ in
   job ? null,
   bundle ? null,
   inNixShell ? null,
-  system
+  system ? builtins.currentSystem
 }@args:
 let
   optionalImport = f: d:
