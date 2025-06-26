@@ -14,7 +14,7 @@ with builtins;
   ocaml-override ? {},
   global-override ? {},
   lib,
-  system ? null
+  system
 }@initial:
 with lib;
 let config = import ./normalize.nix
@@ -67,7 +67,7 @@ in with config; let
       { inherit lib overlays-dir rocq-overlays-dir coq-overlays-dir ocaml-overlays-dir bundle;
         inherit (config) attribute coq-attribute no-rocq-yet pname shell-attribute shell-pname src; };
 
-    pkgs = import config.nixpkgs (if (system != null) then { inherit overlays system; } else { inherit overlays; });
+    pkgs = import config.nixpkgs { inherit overlays system; };
 
     ci = import ./ci.nix { inherit lib this-shell-pkg pkgs bundle; };
 
